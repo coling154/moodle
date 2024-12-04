@@ -1,13 +1,11 @@
 default:
   suites:
     default:
-      paths: {  }
-      contexts: {  }
+      paths: [ 'tests/behat' ]
+      contexts: [ 'behat_progress_bar' ]
   extensions:
     Behat\MinkExtension:
-      base_url: 'http://localhost:8000'
-      goutte: null
-      webdriver: null
+      base_url: 'http://localhost/moodle'
     Moodle\BehatExtension:
-      moodledirroot: /Should/Change/To/Moodle/www/dir
-      steps_definitions: {  }
+      moodledirroot: 'C:/xampp/htdocs/moodle'
+      steps_definitions: [ 'tests/behat' ]
