@@ -49,6 +49,7 @@ Feature: User login
   Scenario: Successful login
     #Scenario Successful login and Course creation and not seeing a Progress Bar
     Given I log in as "admin"
+    And I open my profile in edit mode
     And I am on site homepage
     Then I should see "Dashboard"
     And I should see "My courses"
