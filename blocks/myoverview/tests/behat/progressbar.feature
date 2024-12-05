@@ -1,65 +1,99 @@
-#@block @login @javascript
-#Feature: User login
-#  In order to access the system
-#  As a Moodle user
-#  I need to log in successfully
+@core @core_course @core_courseformat
+Feature: Course index completion icons
+  In order to quickly check my activities completions
+  As a student
+  I need to see the activity completion in the course index.
 
-#  Background:
-#    Given the following "users" exist:
-#      | username | firstname | lastname | email | password |
-#      | admin    | Admin     | User     |       |          |
+  Background:
+    Given the following "users" exist:
+      | username | firstname | lastname | email                |
+      | teacher1 | Teacher   | 1        | teacher1@example.com |
+      | student1 | Student   | 1        | student1@example.com |
+    And the following "course" exists:
+      | fullname         | Course 1 |
+      | shortname        | C1       |
+      | category         | 0        |
+      | enablecompletion | 1        |
+      | numsections      | 4        |
 
-#  @login
-#  Scenario: Successful login
-#    Given I am on site homepage
-#    And I log in as "admin"
-#    And I set the field "Username" to "admin"
-#    And I set the field "Password" to ""
-#    And I press "Log in"
-#    Then I should see "Dashboard"
+    And the following "activities" exist:
+      | activity | name              | intro                       | course | idnumber | section | completion |
+      | assign   | Activity sample 1 | Test assignment description | C1     | sample1  | 1       | 1          |
+      | assign   | Activity sample 2 | Test assignment description | C1     | sample2  | 1       | 1          |
+      | assign   | Activity sample 3 | Test assignment description | C1     | sample3  | 1       | 1          |
+      | assign   | Activity sample 4 | Test assignment description | C1     | sample4  | 1       | 1          |
+      | assign   | Activity sample 5 | Test assignment description | C1     | sample5  | 1       | 1          |
+    And the following "course enrolments" exist:
+      | user     | course | role           |
+      | student1 | C1     | student        |
+      | teacher1 | C1     | editingteacher |
+    # The course index is hidden by default in small devices.
 
 
-@block @javascript
-Feature: User login
-  In order to access the system
-  As a Moodle user
-  I need to log in successfully
-
-  # Feature: Progress Bar
-  #   In order to see Progress Bar
-  #   As a moodle user
-  #   I need to be enrolled in a course with assigned work
-
-  Scenario: Checking to see if there is no progress bar
-    #Scenario Successful login and Course creation and not seeing a Progress Bar
-    Given I log in as "admin"
-    And I am on site homepage
-    Then I should see "Dashboard"
+  @javascript
+  Scenario: Manual completion in an activity page should update the course progress bar
+    Given I am on the "sample1" "Activity" page logged in as "student1"
+    And "To do" "icon" should exist in the "courseindex-content" "region"
+    When I press "Mark as done"
+    And I wait until "Done" "button" exists
+    And "Done" "icon" should exist in the "courseindex-content" "region"
+    And I press "Done"
     And I should see "My courses"
     Then I click on "My courses" "link"
     Then I should see "My courses"
-    And I click on "Create new course" "link"
-    And I set the field "Course full name" to "Course 1"
-    And I set the field "Course short name" to "C1"
-    Then I press "Save and display"
-    Then I click on "My courses" "link"
-    Then I should see "Course 1"
-    And I should not see "Progress Bar"
+    And the field with xpath "//meter[@id='progress-bar']" matches value "0"
 
-  Scenario: Successful login
-    #Scenario Successful login and Course creation and not seeing a Progress Bar
-    Given I log in as "admin"
-    And I open my profile in edit mode
-    And I am on site homepage
-    Then I should see "Dashboard"
+    Then I click on "Course 1" "link"
+    Then I should see "Activity sample 1"
+    And I click on "Activity sample 1" "link"
+    When I press "Mark as done"
+    And I wait until "Done" "button" exists
+    And "Done" "icon" should exist in the "courseindex-content" "region"
     And I should see "My courses"
     Then I click on "My courses" "link"
     Then I should see "My courses"
-    And I click on "Create new course" "link"
-    And I set the field "Course full name" to "Course 1"
-    And I set the field "Course short name" to "C1"
-    Then I press "Save and display"
-    And edit mode should be available on the current page
-    Then I open my profile in edit mode
-    #Then I click on "My courses" "link"
-    #Then I should see "Course 1"
+    And the field with xpath "//meter[@id='progress-bar']" matches value "20"
+
+    Then I click on "Course 1" "link"
+    Then I should see "Activity sample 2"
+    And I click on "Activity sample 2" "link"
+    When I press "Mark as done"
+    And I wait until "Done" "button" exists
+    And "Done" "icon" should exist in the "courseindex-content" "region"
+    And I should see "My courses"
+    Then I click on "My courses" "link"
+    Then I should see "My courses"
+    And the field with xpath "//meter[@id='progress-bar']" matches value "40"
+
+    Then I click on "Course 1" "link"
+    Then I should see "Activity sample 3"
+    And I click on "Activity sample 3" "link"
+    When I press "Mark as done"
+    And I wait until "Done" "button" exists
+    And "Done" "icon" should exist in the "courseindex-content" "region"
+    And I should see "My courses"
+    Then I click on "My courses" "link"
+    Then I should see "My courses"
+    And the field with xpath "//meter[@id='progress-bar']" matches value "60"
+
+    Then I click on "Course 1" "link"
+    Then I should see "Activity sample 4"
+    And I click on "Activity sample 4" "link"
+    When I press "Mark as done"
+    And I wait until "Done" "button" exists
+    And "Done" "icon" should exist in the "courseindex-content" "region"
+    And I should see "My courses"
+    Then I click on "My courses" "link"
+    Then I should see "My courses"
+    And the field with xpath "//meter[@id='progress-bar']" matches value "80"
+
+    Then I click on "Course 1" "link"
+    Then I should see "Activity sample 5"
+    And I click on "Activity sample 5" "link"
+    When I press "Mark as done"
+    And I wait until "Done" "button" exists
+    And "Done" "icon" should exist in the "courseindex-content" "region"
+    And I should see "My courses"
+    Then I click on "My courses" "link"
+    Then I should see "My courses"
+    And the field with xpath "//meter[@id='progress-bar']" matches value "100"
