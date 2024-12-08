@@ -29,9 +29,9 @@
     {{progress}}% complete
 </div>
 
-    <meter min="0" max="100" value="{{progress}}"
-           low="33"
-           high="66"
-           optimum="100">
-        {{progress}}%
-    </meter>
+<meter id="progress-bar" min="0" max="100" value="{{progress}}"
+       low="33" {{! From 0-33% Color: Red}}
+       high="66" {{! From 34-66% Color: Yellow}}
+       optimum="100"> {{! From 67-100% Color: Green}}
+    {{progress}}%
+</meter>

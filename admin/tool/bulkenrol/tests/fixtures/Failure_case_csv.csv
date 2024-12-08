@@ -1,0 +1,6 @@
+user,course,role
+stu1@moodle.com,C1,student
+student2@moodle.org,C1,student
+stu3@moodle.com,DNE123,teacher
+stu2@moodle.com,C1,unreal
+fakeUser@whoops.org,DNE456,mythical

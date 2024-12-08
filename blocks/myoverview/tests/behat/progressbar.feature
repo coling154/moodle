@@ -1,8 +1,7 @@
 @core @core_course @core_courseformat
-Feature: Course index completion icons
-  In order to quickly check my activities completions
-  As a student
-  I need to see the activity completion in the course index.
+Feature: Check Progress Bar Value
+  Checking the Progress Bar value
+  After each Assignment is completed/marked as done
 
   Background:
     Given the following "users" exist:
@@ -31,7 +30,7 @@ Feature: Course index completion icons
 
 
   @javascript
-  Scenario: Manual completion in an activity page should update the course progress bar
+  Scenario: Completion of Assignments and checking Progress Bar Value
     Given I am on the "sample1" "Activity" page logged in as "student1"
     And "To do" "icon" should exist in the "courseindex-content" "region"
     When I press "Mark as done"

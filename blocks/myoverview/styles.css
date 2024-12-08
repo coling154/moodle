@@ -9,19 +9,24 @@ meter {
     height: 20px;
 }
 
+/* Meter tag in progress-bar.mustache already has default colors for each level of progression */
+/* Pseudo Code */
 meter::-webkit-meter-bar {
     background-color: #e0e0e0;
     border-radius: 5px;
 }
 
+/* Pseudo Code */
 meter::-webkit-meter-optimum-value {
     background-color: #2ecc71; /* Green for 67-100% */
 }
 
+/* Pseudo Code */
 meter::-webkit-meter-suboptimal-value {
     background-color: #f1c40f; /* Yellow for 34-66% */
 }
 
+/* Pseudo Code */
 meter::-webkit-meter-even-less-good-value {
     background-color: #e74c3c; /* Red for 0-33% */
 }
