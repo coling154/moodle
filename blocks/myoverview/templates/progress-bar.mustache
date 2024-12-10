@@ -30,8 +30,8 @@
 </div>
 
 <meter id="progress-bar" min="0" max="100" value="{{progress}}"
-       low="33" {{! From 0-33% Color: Red}}
-       high="66" {{! From 34-66% Color: Yellow}}
+       low="34" {{! From 1-33% Color: Red, 0 won't have any bar or color}}
+       high="67" {{! From 34-66% Color: Yellow}}
        optimum="100"> {{! From 67-100% Color: Green}}
     {{progress}}%
 </meter>
